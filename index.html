@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -6,83 +6,583 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#650909">
 <title>IMLEK 2027 — GENK</title>
+
 <style>
 *{box-sizing:border-box}
+
+:root{
+  --gold:#ffdc83;
+  --bright:#fff0bd;
+  --red:#8e0909;
+}
+
+html{min-height:100%;}
+
 body{
-  margin:0;min-height:100vh;color:#ffe8a3;
+  margin:0;
+  min-height:100vh;
+  min-height:100svh;
+  color:var(--bright);
   font-family:Georgia,'Times New Roman',serif;
-  display:flex;align-items:center;justify-content:center;
-  text-align:center;overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  overflow-x:hidden;
+  position:relative;
   background:
-    radial-gradient(ellipse at 50% 45%,#9d2020 0%,#650909 48%,#210303 100%);
+    radial-gradient(ellipse at 50% 35%,
+      #861b13 0%,#500606 48%,#160202 100%);
 }
-body:before,body:after{
-  content:"";position:fixed;width:260px;height:260px;
-  border:1px solid #d7a94b55;border-radius:50%;
-  box-shadow:0 0 0 18px #d7a94b0d,0 0 0 40px #d7a94b0a;
+
+/* Latar kelenteng megah */
+.temple-bg{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  overflow:hidden;
+  pointer-events:none;
+  background:
+    radial-gradient(ellipse at 50% 65%,
+      #d38a241c 0%,transparent 45%),
+    linear-gradient(180deg,
+      #180303 0%,#570707 38%,#290303 100%);
 }
-body:before{top:-130px;left:-100px}
-body:after{bottom:-150px;right:-100px}
+
+.temple-bg svg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+}
+
+/* Cahaya emas di tengah */
+.temple-bg:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(ellipse at center,
+      #28020235 0%,#18010150 55%,#1000009c 100%),
+    linear-gradient(90deg,
+      #16010155,transparent 25%,transparent 75%,#16010155);
+}
+
+/* Naga dekorasi */
+.dragon{
+  position:fixed;
+  z-index:1;
+  top:15%;
+  font-size:clamp(65px,10vw,125px);
+  filter:drop-shadow(0 0 16px #ffb52e66);
+  opacity:.82;
+  pointer-events:none;
+  animation:dragonFloat 5s ease-in-out infinite;
+}
+.dragon-left{
+  left:1%;
+  transform:rotate(-20deg);
+}
+.dragon-right{
+  right:1%;
+  transform:scaleX(-1) rotate(-20deg);
+  animation-delay:2.5s;
+}
+
+@keyframes dragonFloat{
+  0%,100%{margin-top:0}
+  50%{margin-top:12px}
+}
+
+/* Lampion */
+.lantern{
+  position:fixed;
+  z-index:1;
+  top:0;
+  font-size:clamp(34px,5vw,62px);
+  filter:drop-shadow(0 0 15px #ffad32);
+  transform-origin:top center;
+  animation:swing 3s ease-in-out infinite;
+  pointer-events:none;
+}
+.lantern:before{
+  content:"";
+  position:absolute;
+  height:65px;
+  width:2px;
+  background:linear-gradient(#e6b45c,#8c4c12);
+  bottom:88%;
+  left:50%;
+}
+.lantern-one{left:9%}
+.lantern-two{right:9%;animation-delay:1.5s}
+
+@keyframes swing{
+  0%,100%{transform:rotate(-5deg)}
+  50%{transform:rotate(5deg)}
+}
+
+/* Barongsai */
+.lion{
+  position:fixed;
+  z-index:1;
+  bottom:1%;
+  font-size:clamp(75px,13vw,155px);
+  filter:drop-shadow(0 0 18px #ffad28);
+  pointer-events:none;
+  animation:lionDance 2.4s ease-in-out infinite;
+}
+.lion-left{left:0}
+.lion-right{right:0;animation-delay:1.2s}
+
+@keyframes lionDance{
+  0%,100%{transform:translateY(0) rotate(-4deg)}
+  50%{transform:translateY(-12px) rotate(4deg)}
+}
+
+/* Ornamen emas */
+.corner{
+  position:fixed;
+  width:180px;
+  height:180px;
+  border:1px solid #edc36b55;
+  border-radius:50%;
+  box-shadow:
+    0 0 0 15px #edc36b0d,
+    0 0 0 32px #edc36b09,
+    inset 0 0 35px #edc36b12;
+  pointer-events:none;
+  z-index:1;
+}
+.corner-a{top:-100px;left:-90px}
+.corner-b{bottom:-110px;right:-80px}
+
+/* Konten countdown */
+.page{
+  width:min(790px,94%);
+  padding:24px 16px;
+  position:relative;
+  z-index:2;
+  margin:auto;
+  background:
+    linear-gradient(145deg,#320303a8,#1b0101c9);
+  border:1px solid #e8bd634d;
+  border-radius:24px;
+  box-shadow:
+    0 0 45px #00000080,
+    0 0 80px #f4a62313,
+    inset 0 0 35px #ffcb4b08;
+  backdrop-filter:blur(5px);
+}
+
+.top{
+  font-size:clamp(12px,2vw,16px);
+  letter-spacing:4px;
+  color:var(--gold);
+  text-shadow:0 0 15px #ffcb5570;
+}
+
 .gold{color:#ffd778}
-.page{width:min(900px,94%);padding:30px 16px;position:relative;z-index:1}
-.top{font-size:clamp(13px,2vw,17px);letter-spacing:6px;color:#ffdc83}
-.lanterns{font-size:clamp(42px,8vw,76px);margin:15px 0}
-h1{font-size:clamp(38px,8vw,78px);line-height:1.05;margin:12px 0;color:#ffdf91;text-shadow:0 0 28px #ffc34c66}
-.subtitle{letter-spacing:4px;font-size:clamp(12px,2vw,17px);margin:18px 0;color:#ffe6ad}
-.divider{width:110px;height:2px;background:linear-gradient(90deg,transparent,#ffda79,transparent);margin:24px auto}
-.greeting{font-size:clamp(23px,4vw,36px);margin:14px 0}
-.countdown{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:32px 0}
-.unit{padding:20px 5px;border:1px solid #e9bd6355;border-radius:12px;background:linear-gradient(145deg,#ffffff0d,#00000020);box-shadow:inset 0 0 20px #ffc8570a}
-.num{display:block;font-family:Arial,sans-serif;font-size:clamp(30px,7vw,58px);font-weight:700;color:#fff0bd;font-variant-numeric:tabular-nums}
-.label{display:block;font-family:Arial,sans-serif;font-size:11px;letter-spacing:2px;color:#e9bd83;margin-top:9px}
-.clock{font-family:Arial,sans-serif;font-size:15px;letter-spacing:2px;color:#ffe7b4}
-.footer{font-family:Arial,sans-serif;font-size:11px;letter-spacing:3px;color:#c99b67;margin-top:28px}
-.spark{position:fixed;color:#ffd778;opacity:.55;animation:twinkle 2s infinite alternate}
-.s1{top:13%;left:12%}.s2{top:25%;right:12%;animation-delay:1s}.s3{bottom:16%;left:18%;animation-delay:.5s}.s4{bottom:20%;right:15%;animation-delay:1.4s}
-@keyframes twinkle{from{opacity:.15;transform:scale(.8)}to{opacity:.85;transform:scale(1.25)}}
-@media(max-width:480px){.countdown{gap:6px}.unit{padding:16px 2px}.label{font-size:9px;letter-spacing:1px}.top{letter-spacing:3px}.subtitle{letter-spacing:2px}}
+
+.lanterns{
+  font-size:clamp(32px,6vw,55px);
+  margin:9px 0;
+  filter:drop-shadow(0 0 12px #ffad2e);
+}
+
+h1{
+  font-size:clamp(35px,7vw,68px);
+  line-height:1.03;
+  margin:8px 0;
+  color:#ffe4a0;
+  text-shadow:
+    0 2px 0 #8e4a10,
+    0 0 25px #ffbd4566;
+}
+
+.subtitle{
+  letter-spacing:3px;
+  font-size:clamp(10px,1.8vw,15px);
+  margin:12px 0;
+  color:#ffe5ad;
+}
+
+.greeting{
+  font-size:clamp(22px,4vw,32px);
+  margin:10px 0;
+  text-shadow:0 0 18px #ffcf5266;
+}
+
+.divider{
+  width:130px;
+  height:2px;
+  background:linear-gradient(
+    90deg,transparent,#ffe3a0,#d99a31,transparent);
+  margin:17px auto;
+  box-shadow:0 0 12px #ffc34c66;
+}
+
+.countdown{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:9px;
+  margin:20px 0;
+}
+
+.unit{
+  padding:14px 4px;
+  border:1px solid #e9bd6370;
+  border-radius:12px;
+  background:
+    linear-gradient(145deg,#8c241d88,#210303c9);
+  box-shadow:
+    inset 0 0 20px #ffc8570c,
+    0 4px 15px #00000033;
+}
+
+.num{
+  display:block;
+  font-family:Arial,sans-serif;
+  font-size:clamp(27px,6vw,48px);
+  font-weight:700;
+  color:#fff0bd;
+  font-variant-numeric:tabular-nums;
+  text-shadow:0 0 15px #ffd77844;
+}
+
+.label{
+  display:block;
+  font-family:Arial,sans-serif;
+  font-size:10px;
+  letter-spacing:2px;
+  color:#f3cb87;
+  margin-top:7px;
+}
+
+.clock{
+  font-family:Arial,sans-serif;
+  font-size:14px;
+  letter-spacing:1.5px;
+  color:#ffe7b4;
+}
+
+.footer{
+  font-family:Arial,sans-serif;
+  font-size:10px;
+  letter-spacing:3px;
+  color:#e5b56d;
+  margin-top:18px;
+}
+
+.spark{
+  position:fixed;
+  z-index:1;
+  color:#ffe39a;
+  text-shadow:0 0 15px #ffca48;
+  opacity:.7;
+  animation:twinkle 2s infinite alternate;
+  pointer-events:none;
+}
+.s1{top:30%;left:12%}
+.s2{top:43%;right:12%;animation-delay:1s}
+.s3{bottom:24%;left:25%;animation-delay:.5s}
+.s4{bottom:30%;right:24%;animation-delay:1.4s}
+
+@keyframes twinkle{
+  from{opacity:.15;transform:scale(.8)}
+  to{opacity:.9;transform:scale(1.3)}
+}
+
+/* Efek partikel emas */
+.particle{
+  position:fixed;
+  z-index:1;
+  bottom:-20px;
+  width:4px;
+  height:4px;
+  border-radius:50%;
+  background:#ffdb75;
+  box-shadow:0 0 12px 3px #ffb52e88;
+  animation:rise linear infinite;
+  pointer-events:none;
+}
+
+.p1{left:15%;animation-duration:8s}
+.p2{left:35%;animation-duration:11s;animation-delay:2s}
+.p3{left:65%;animation-duration:9s;animation-delay:1s}
+.p4{left:85%;animation-duration:12s;animation-delay:3s}
+
+@keyframes rise{
+  0%{transform:translateY(0);opacity:0}
+  15%{opacity:.9}
+  85%{opacity:.7}
+  100%{transform:translateY(-110vh);opacity:0}
+}
+
+@media(max-width:480px){
+  .page{
+    width:94%;
+    padding:19px 11px;
+    border-radius:18px;
+    margin:12px auto;
+  }
+  .countdown{gap:5px;margin:16px 0}
+  .unit{padding:12px 2px}
+  .label{font-size:9px;letter-spacing:1px}
+  .top{letter-spacing:2px}
+  .subtitle{letter-spacing:1.5px}
+  .dragon{top:10%;font-size:65px;opacity:.45}
+  .dragon-left{left:-17px}
+  .dragon-right{right:-17px}
+  .lantern-one{left:5%}
+  .lantern-two{right:5%}
+  .lion{font-size:75px;bottom:0;opacity:.7}
+  .lion-left{left:-14px}
+  .lion-right{right:-14px}
+  .clock{font-size:12px}
+  .footer{letter-spacing:2px}
+}
+@media(max-height:700px){
+  .page{padding-top:12px;padding-bottom:12px}
+  .lanterns{margin:4px 0}
+  .subtitle{margin:8px 0}
+  .greeting{margin:6px 0}
+  .divider{margin:11px auto}
+  .countdown{margin:12px 0}
+  .footer{margin-top:10px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{
+    animation:none!important;
+    scroll-behavior:auto!important;
+  }
+}
 </style>
 </head>
+
 <body>
-<div class="spark s1">✦</div><div class="spark s2">✧</div>
-<div class="spark s3">✦</div><div class="spark s4">✧</div>
+
+<!-- ILUSTRASI KELENTENG SVG -->
+<div class="temple-bg" aria-hidden="true">
+<svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice"
+     xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <linearGradient id="roof" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#ed3a1b"/>
+    <stop offset=".5" stop-color="#a20e0b"/>
+    <stop offset="1" stop-color="#480403"/>
+  </linearGradient>
+  <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+    <stop stop-color="#fff0a3"/>
+    <stop offset=".4" stop-color="#d99a32"/>
+    <stop offset="1" stop-color="#7c3b0b"/>
+  </linearGradient>
+  <linearGradient id="pillar" x1="0" y1="0" x2="1" y2="0">
+    <stop stop-color="#530504"/>
+    <stop offset=".5" stop-color="#c51b0e"/>
+    <stop offset="1" stop-color="#470202"/>
+  </linearGradient>
+  <radialGradient id="glow">
+    <stop stop-color="#ffcc54" stop-opacity=".5"/>
+    <stop offset="1" stop-color="#ffb52e" stop-opacity="0"/>
+  </radialGradient>
+  <pattern id="tiles" width="36" height="18" patternUnits="userSpaceOnUse">
+    <path d="M0 0H36M18 0V18" stroke="#ffd16a" stroke-opacity=".45" fill="none"/>
+  </pattern>
+</defs>
+
+<!-- Cahaya bulan dan lentera jauh -->
+<circle cx="720" cy="210" r="250" fill="url(#glow)"/>
+<g fill="#ffdc83" opacity=".8">
+  <circle cx="120" cy="170" r="2"/>
+  <circle cx="280" cy="250" r="2"/>
+  <circle cx="1180" cy="180" r="2"/>
+  <circle cx="1320" cy="300" r="2"/>
+  <circle cx="950" cy="110" r="2"/>
+  <circle cx="520" cy="120" r="2"/>
+  <circle cx="850" cy="270" r="2"/>
+</g>
+
+<!-- Atap kelenteng utama -->
+<g stroke="#e4af48" stroke-width="3" stroke-linejoin="round">
+  <path d="M260 365 Q420 315 530 250 Q720 175 910 250 Q1020 315 1180 365
+           L1120 354 Q1000 340 910 290 Q720 225 530 290 Q440 340 320 354Z"
+        fill="url(#roof)"/>
+  <path d="M310 355 Q720 260 1130 355 L1090 382 Q720 300 350 382Z"
+        fill="#730706"/>
+  <path d="M330 356 Q720 280 1110 356" fill="none" stroke-width="5"/>
+  <path d="M530 250 Q470 220 430 238 Q455 260 490 258
+           M910 250 Q970 220 1010 238 Q985 260 950 258"
+        fill="none" stroke-width="7"/>
+  <path d="M420 331 Q720 240 1020 331" fill="none" stroke-width="2"/>
+  <path d="M355 355 L355 375 M1085 355 L1085 375" fill="none"/>
+</g>
+
+<!-- Detail genteng -->
+<path d="M325 350 Q720 270 1115 350 L1080 373 Q720 300 360 373Z"
+      fill="url(#tiles)" opacity=".8"/>
+
+<!-- Atap tingkat kedua -->
+<g stroke="#e5b34c" stroke-width="3" stroke-linejoin="round">
+  <path d="M80 505 Q250 440 370 380 Q470 340 560 380
+           L510 395 Q420 385 365 420 Q260 470 120 515Z"
+        fill="url(#roof)"/>
+  <path d="M880 380 Q970 340 1075 380 Q1190 440 1360 505
+           L1320 515 Q1180 470 1075 420 Q1020 385 930 395Z"
+        fill="url(#roof)"/>
+  <path d="M110 504 Q300 445 370 405 L355 430 Q270 470 145 516Z"
+        fill="#8c0b08"/>
+  <path d="M1330 504 Q1140 445 1070 405 L1085 430 Q1170 470 1295 516Z"
+        fill="#8c0b08"/>
+</g>
+
+<!-- Pilar utama -->
+<g stroke="#d9a246" stroke-width="2">
+  <path d="M370 380 L410 380 L420 700 L360 700Z" fill="url(#pillar)"/>
+  <path d="M1030 380 L1070 380 L1080 700 L1020 700Z" fill="url(#pillar)"/>
+  <path d="M390 380V700 M1050 380V700" stroke="#ffdc83" opacity=".55"/>
+  <path d="M350 390H430 M1010 390H1090" stroke-width="8"/>
+  <path d="M350 680H430 M1010 680H1090" stroke-width="8"/>
+</g>
+
+<!-- Pintu dan panel ukiran -->
+<g stroke="#dca849" stroke-width="3">
+  <path d="M460 700V485 Q720 380 980 485V700Z" fill="#350302"/>
+  <path d="M485 700V495 Q720 405 955 495V700Z" fill="#690805"/>
+  <path d="M510 700V510 Q720 430 930 510V700Z" fill="#280202"/>
+  <path d="M720 440V700 M510 585H930 M510 640H930"
+        stroke="#b47a27" stroke-opacity=".6"/>
+  <path d="M560 540Q720 475 880 540 M560 670Q720 605 880 670"
+        fill="none" stroke="#e8bd63" stroke-opacity=".5"/>
+</g>
+
+<!-- Lantai bercahaya -->
+<path d="M0 720 Q720 640 1440 720V900H0Z" fill="#160202" opacity=".8"/>
+<path d="M0 745 Q720 670 1440 745 M0 800 Q720 730 1440 800
+         M0 865 Q720 795 1440 865"
+      fill="none" stroke="#d9a246" stroke-opacity=".28" stroke-width="2"/>
+
+<!-- Ukiran emas di bagian samping -->
+<g fill="none" stroke="url(#gold)" stroke-width="4" opacity=".8">
+  <path d="M30 560Q100 480 165 560T300 560
+           Q235 625 165 560T30 560Z"/>
+  <path d="M1140 560Q1210 480 1275 560T1410 560
+           Q1345 625 1275 560T1140 560Z"/>
+  <circle cx="165" cy="560" r="36"/>
+  <circle cx="1275" cy="560" r="36"/>
+</g>
+
+<!-- Awan tradisional -->
+<g fill="none" stroke="#e8b954" stroke-width="4" opacity=".4">
+  <path d="M20 660Q40 620 75 645Q90 600 125 635Q160 625 170 660H20Z"/>
+  <path d="M1270 660Q1290 620 1325 645Q1340 600 1375 635Q1410 625 1420 660H1270Z"/>
+</g>
+</svg>
+</div>
+
+<!-- Naga, lampion dan barongsai -->
+<div class="dragon dragon-left">🐉</div>
+<div class="dragon dragon-right">🐉</div>
+
+<div class="lantern lantern-one">🏮</div>
+<div class="lantern lantern-two">🏮</div>
+
+<div class="lion lion-left">🦁</div>
+<div class="lion lion-right">🦁</div>
+
+<div class="corner corner-a"></div>
+<div class="corner corner-b"></div>
+
+<div class="spark s1">✦</div>
+<div class="spark s2">✧</div>
+<div class="spark s3">✦</div>
+<div class="spark s4">✧</div>
+
+<div class="particle p1"></div>
+<div class="particle p2"></div>
+<div class="particle p3"></div>
+<div class="particle p4"></div>
+
 <main class="page">
   <div class="top">✦ SPECIAL CELEBRATION ✦</div>
+
   <div class="lanterns">🏮 🧧 🏮</div>
+
   <div class="subtitle">WELCOME TO</div>
+
   <h1>CHINESE<br><span class="gold">NEW YEAR</span></h1>
+
   <div class="greeting">恭喜发财</div>
+
   <div class="subtitle">IMLEK 2027 · YEAR OF THE GOAT</div>
+
   <div class="divider"></div>
+
   <div class="top">COUNTDOWN TO IMLEK</div>
+
   <section class="countdown">
-    <div class="unit"><span class="num" id="days">000</span><span class="label">HARI</span></div>
-    <div class="unit"><span class="num" id="hours">00</span><span class="label">JAM</span></div>
-    <div class="unit"><span class="num" id="minutes">00</span><span class="label">MENIT</span></div>
-    <div class="unit"><span class="num" id="seconds">00</span><span class="label">DETIK</span></div>
+    <div class="unit">
+      <span class="num" id="days">000</span>
+      <span class="label">HARI</span>
+    </div>
+    <div class="unit">
+      <span class="num" id="hours">00</span>
+      <span class="label">JAM</span>
+    </div>
+    <div class="unit">
+      <span class="num" id="minutes">00</span>
+      <span class="label">MENIT</span>
+    </div>
+    <div class="unit">
+      <span class="num" id="seconds">00</span>
+      <span class="label">DETIK</span>
+    </div>
   </section>
-  <div class="clock">🕒 <span id="clock">Memuat jam...</span> WIB (GMT+7)</div>
+
+  <div class="clock">
+    🕒 <span id="clock">Memuat jam...</span> WIB (GMT+7)
+  </div>
+
   <div class="divider"></div>
+
   <div class="greeting gold">新年快乐</div>
+
   <div class="footer">✦ EXCLUSIVE CELEBRATION BY GENK ✦</div>
 </main>
+
 <script>
 const target = new Date("2027-02-06T00:00:00+07:00").getTime();
 const $ = id => document.getElementById(id);
+
 function update(){
   const now = Date.now();
-  let diff = Math.max(0,target-now);
-  $("days").textContent = String(Math.floor(diff/86400000)).padStart(3,"0");
-  $("hours").textContent = String(Math.floor(diff%86400000/3600000)).padStart(2,"0");
-  $("minutes").textContent = String(Math.floor(diff%3600000/60000)).padStart(2,"0");
-  $("seconds").textContent = String(Math.floor(diff%60000/1000)).padStart(2,"0");
+  const diff = Math.max(0, target - now);
+
+  $("days").textContent =
+    String(Math.floor(diff / 86400000)).padStart(3,"0");
+
+  $("hours").textContent =
+    String(Math.floor(diff % 86400000 / 3600000)).padStart(2,"0");
+
+  $("minutes").textContent =
+    String(Math.floor(diff % 3600000 / 60000)).padStart(2,"0");
+
+  $("seconds").textContent =
+    String(Math.floor(diff % 60000 / 1000)).padStart(2,"0");
+
   $("clock").textContent = new Intl.DateTimeFormat("id-ID",{
-    timeZone:"Asia/Jakarta",hour:"2-digit",minute:"2-digit",
-    second:"2-digit",hour12:false
+    timeZone:"Asia/Jakarta",
+    hour:"2-digit",
+    minute:"2-digit",
+    second:"2-digit",
+    hour12:false
   }).format(new Date());
 }
+
 update();
 setInterval(update,1000);
 </script>
+
 </body>
 </html>
+```
