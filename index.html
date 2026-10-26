@@ -1,1 +1,88 @@
 
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#650909">
+<title>IMLEK 2027 — GENK</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;min-height:100vh;color:#ffe8a3;
+  font-family:Georgia,'Times New Roman',serif;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;overflow:hidden;
+  background:
+    radial-gradient(ellipse at 50% 45%,#9d2020 0%,#650909 48%,#210303 100%);
+}
+body:before,body:after{
+  content:"";position:fixed;width:260px;height:260px;
+  border:1px solid #d7a94b55;border-radius:50%;
+  box-shadow:0 0 0 18px #d7a94b0d,0 0 0 40px #d7a94b0a;
+}
+body:before{top:-130px;left:-100px}
+body:after{bottom:-150px;right:-100px}
+.gold{color:#ffd778}
+.page{width:min(900px,94%);padding:30px 16px;position:relative;z-index:1}
+.top{font-size:clamp(13px,2vw,17px);letter-spacing:6px;color:#ffdc83}
+.lanterns{font-size:clamp(42px,8vw,76px);margin:15px 0}
+h1{font-size:clamp(38px,8vw,78px);line-height:1.05;margin:12px 0;color:#ffdf91;text-shadow:0 0 28px #ffc34c66}
+.subtitle{letter-spacing:4px;font-size:clamp(12px,2vw,17px);margin:18px 0;color:#ffe6ad}
+.divider{width:110px;height:2px;background:linear-gradient(90deg,transparent,#ffda79,transparent);margin:24px auto}
+.greeting{font-size:clamp(23px,4vw,36px);margin:14px 0}
+.countdown{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:32px 0}
+.unit{padding:20px 5px;border:1px solid #e9bd6355;border-radius:12px;background:linear-gradient(145deg,#ffffff0d,#00000020);box-shadow:inset 0 0 20px #ffc8570a}
+.num{display:block;font-family:Arial,sans-serif;font-size:clamp(30px,7vw,58px);font-weight:700;color:#fff0bd;font-variant-numeric:tabular-nums}
+.label{display:block;font-family:Arial,sans-serif;font-size:11px;letter-spacing:2px;color:#e9bd83;margin-top:9px}
+.clock{font-family:Arial,sans-serif;font-size:15px;letter-spacing:2px;color:#ffe7b4}
+.footer{font-family:Arial,sans-serif;font-size:11px;letter-spacing:3px;color:#c99b67;margin-top:28px}
+.spark{position:fixed;color:#ffd778;opacity:.55;animation:twinkle 2s infinite alternate}
+.s1{top:13%;left:12%}.s2{top:25%;right:12%;animation-delay:1s}.s3{bottom:16%;left:18%;animation-delay:.5s}.s4{bottom:20%;right:15%;animation-delay:1.4s}
+@keyframes twinkle{from{opacity:.15;transform:scale(.8)}to{opacity:.85;transform:scale(1.25)}}
+@media(max-width:480px){.countdown{gap:6px}.unit{padding:16px 2px}.label{font-size:9px;letter-spacing:1px}.top{letter-spacing:3px}.subtitle{letter-spacing:2px}}
+</style>
+</head>
+<body>
+<div class="spark s1">✦</div><div class="spark s2">✧</div>
+<div class="spark s3">✦</div><div class="spark s4">✧</div>
+<main class="page">
+  <div class="top">✦ SPECIAL CELEBRATION ✦</div>
+  <div class="lanterns">🏮 🧧 🏮</div>
+  <div class="subtitle">WELCOME TO</div>
+  <h1>CHINESE<br><span class="gold">NEW YEAR</span></h1>
+  <div class="greeting">恭喜发财</div>
+  <div class="subtitle">IMLEK 2027 · YEAR OF THE GOAT</div>
+  <div class="divider"></div>
+  <div class="top">COUNTDOWN TO IMLEK</div>
+  <section class="countdown">
+    <div class="unit"><span class="num" id="days">000</span><span class="label">HARI</span></div>
+    <div class="unit"><span class="num" id="hours">00</span><span class="label">JAM</span></div>
+    <div class="unit"><span class="num" id="minutes">00</span><span class="label">MENIT</span></div>
+    <div class="unit"><span class="num" id="seconds">00</span><span class="label">DETIK</span></div>
+  </section>
+  <div class="clock">🕒 <span id="clock">Memuat jam...</span> WIB (GMT+7)</div>
+  <div class="divider"></div>
+  <div class="greeting gold">新年快乐</div>
+  <div class="footer">✦ EXCLUSIVE CELEBRATION BY GENK ✦</div>
+</main>
+<script>
+const target = new Date("2027-02-06T00:00:00+07:00").getTime();
+const $ = id => document.getElementById(id);
+function update(){
+  const now = Date.now();
+  let diff = Math.max(0,target-now);
+  $("days").textContent = String(Math.floor(diff/86400000)).padStart(3,"0");
+  $("hours").textContent = String(Math.floor(diff%86400000/3600000)).padStart(2,"0");
+  $("minutes").textContent = String(Math.floor(diff%3600000/60000)).padStart(2,"0");
+  $("seconds").textContent = String(Math.floor(diff%60000/1000)).padStart(2,"0");
+  $("clock").textContent = new Intl.DateTimeFormat("id-ID",{
+    timeZone:"Asia/Jakarta",hour:"2-digit",minute:"2-digit",
+    second:"2-digit",hour12:false
+  }).format(new Date());
+}
+update();
+setInterval(update,1000);
+</script>
+</body>
+</html>
